@@ -18,8 +18,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
+//import org.hibernate.query.Query;
 
 
 /**
@@ -104,7 +105,7 @@ public class DaoBedel {
                 System.out.println("nick:" + b.getNickusuario());
                 
             }*/
-            s.getTransaction().commit();
+            s.getTransaction().commit();//fracno puto
             
             return lista;
     } 
