@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08/11/2017 00:15:16 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="datos.Reserva" table="reserva" schema="public" optimistic-lock="version">
+        <id name="idreserva" type="int">
+            <column name="idreserva" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ciclolectivo" class="datos.Ciclolectivo" fetch="select">
+            <column name="idciclolectivo" />
+        </many-to-one>
+        <many-to-one name="curso" class="datos.Curso" fetch="select">
+            <column name="codigocurso" />
+        </many-to-one>
+        <many-to-one name="docente" class="datos.Docente" fetch="select">
+            <column name="iddocente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="datos.Usuario" fetch="select">
+            <column name="nickusuario" />
+        </many-to-one>
+        <property name="cantalumnos" type="java.lang.Integer">
+            <column name="cantalumnos" />
+        </property>
+        <property name="tipoaula" type="string">
+            <column name="tipoaula" />
+        </property>
+        <one-to-one name="periodica" class="datos.Periodica"></one-to-one>
+        <set name="diareservas" table="diareserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idreserva" not-null="true" />
+            </key>
+            <one-to-many class="datos.Diareserva" />
+        </set>
+        <one-to-one name="esporadica" class="datos.Esporadica"></one-to-one>
+    </class>
+</hibernate-mapping>

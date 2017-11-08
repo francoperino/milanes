@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08/11/2017 00:15:16 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="datos.Clave" table="clave" schema="public" optimistic-lock="version">
+        <id name="idclave" type="int">
+            <column name="idclave" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="politicadeseguridad" class="datos.Politicadeseguridad" fetch="select">
+            <column name="idpolitica" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="datos.Usuario" fetch="select">
+            <column name="nickusuario" />
+        </many-to-one>
+        <property name="claveactual" type="string">
+            <column name="claveactual" />
+        </property>
+        <property name="fechamodificacion" type="date">
+            <column name="fechamodificacion" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>
