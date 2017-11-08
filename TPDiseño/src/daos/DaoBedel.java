@@ -20,7 +20,8 @@ import java.util.Map;
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
-//import org.hibernate.query.Query;
+//import javax.management.Query;
+//import org.hibernate.Query;
 
 
 /**
@@ -77,12 +78,35 @@ public class DaoBedel {
             
             return lista;
     }
-    /*public List <Bedel> buscarPorTurno(String turno){
-        Bedel bedel = new Bedel();
-        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
-        s.beginTransaction();
-        List<Bedel> lista = s.createQuery("select apellido from Usuario where( )")
-    }
+    public List <Map> buscarPorTurno(String turno){
+        Session s =  HibernateUtil.getSessionFactory().getCurrentSession();
+            s.beginTransaction();
+            Query query;
+            
+            if(turno.equals("Todos")){
+                query= s.createQuery("select new map(b.turno,u.nombre,u.apellido,u.nickusuario) from Usuario u, Bedel b where    (b.nickusuario = u.nickusuario)"); 
+            }
+            else{
+               query= s.createQuery("select new map(b.turno,u.nombre,u.apellido,u.nickusuario) from Usuario u, Bedel b where    (b.nickusuario = u.nickusuario) and (b.turno=:turno) ").setParameter("turno", turno); 
+               
+            }
+            List<Map> lista = query.list();
+           
+            for(int i=0; i<lista.size();i++){
+                Map mapa = lista.get(i);
+                Set llaves = mapa.keySet();
+                for(Iterator<String> it = llaves.iterator(); it.hasNext();){
+                    String llaveActual = it.next();
+                    System.out.println( mapa.get(llaveActual));
+                }
+                 
+                
+            }
+            
+            s.getTransaction().commit();
+            
+            return lista;
+    }/*
     public List <Bedel> buscarPorTurnoyApellido(String turno,String apellido){
         Bedel bedel = new Bedel();
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -105,7 +129,7 @@ public class DaoBedel {
                 System.out.println("nick:" + b.getNickusuario());
                 
             }*/
-            s.getTransaction().commit();//fracno puto
+            s.getTransaction().commit();
             
             return lista;
     } 
