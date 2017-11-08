@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08/11/2017 00:15:16 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="datos.Politicadeseguridad" table="politicadeseguridad" schema="public" optimistic-lock="version">
+        <id name="idpolitica" type="int">
+            <column name="idpolitica" />
+            <generator class="assigned" />
+        </id>
+        <property name="signosespeciales" type="string">
+            <column name="signosespeciales" />
+        </property>
+        <property name="longclavemin" type="java.lang.Integer">
+            <column name="longclavemin" />
+        </property>
+        <property name="contienedigito" type="java.lang.Boolean">
+            <column name="contienedigito" />
+        </property>
+        <property name="igualaanterior" type="java.lang.Boolean">
+            <column name="igualaanterior" />
+        </property>
+        <set name="claves" table="clave" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idpolitica" not-null="true" />
+            </key>
+            <one-to-many class="datos.Clave" />
+        </set>
+    </class>
+</hibernate-mapping>
