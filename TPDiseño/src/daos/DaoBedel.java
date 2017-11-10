@@ -30,19 +30,11 @@ import org.hibernate.Session;
  */
 public class DaoBedel {
     
-    public void insertarBedel(String apellido,String nombre,String turno,String nickUsuario,String contrasea){
+     public void insertarBedel(String apellido,String nombre,String turno,String nickUsuario,String contrasea){
                      Session s = HibernateUtil.getSessionFactory().getCurrentSession();
                      s.beginTransaction();
-               
-                     Clave cl = new Clave();
                      Politicadeseguridad ps = new Politicadeseguridad();
-                     s.createQuery("select MAX(idpolitica) from Politicadeseguridad  ");
-                     
-                     ps.setSignosespeciales("!$%&)(*+,-./@");
-                     ps.setLongclavemin(7);
-                     ps.setContienedigito(true);
-                     ps.setIgualaanterior(false);
-                     s.save(ps);        
+                     ps.setIdpolitica(4);
                      Usuario ar = new Usuario();
                      ar.setNickusuario(nickUsuario);
                      ar.setApellido(apellido);
