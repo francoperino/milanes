@@ -114,7 +114,7 @@ public class InicioAdmin extends javax.swing.JFrame {
 
         usuarioRegistrado.setFont(new java.awt.Font("Showcard Gothic", 2, 14)); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\franc\\Documents\\NetBeansProjects\\TPDiseño\\src\\imagenes\\bienvenido.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bienvenido.jpg"))); // NOI18N
 
         jButton1.setText("Cerrar Sesión");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -276,6 +276,11 @@ public class InicioAdmin extends javax.swing.JFrame {
         jLabel10.setText("Turno");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Noche", "Tarde", "Mañana" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Buscar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -319,6 +324,12 @@ public class InicioAdmin extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(TablaBusqueda);
+        if (TablaBusqueda.getColumnModel().getColumnCount() > 0) {
+            TablaBusqueda.getColumnModel().getColumn(0).setHeaderValue("Apellido");
+            TablaBusqueda.getColumnModel().getColumn(1).setHeaderValue("Nombre");
+            TablaBusqueda.getColumnModel().getColumn(2).setHeaderValue("Turno");
+            TablaBusqueda.getColumnModel().getColumn(3).setHeaderValue("Nick de usuario");
+        }
 
         jButton5.setText("Modificar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -757,6 +768,10 @@ cambiarNombreBuscar("");
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
