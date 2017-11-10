@@ -6,7 +6,7 @@
     <class name="datos.Politicadeseguridad" table="politicadeseguridad" schema="public" optimistic-lock="version">
         <id name="idpolitica" type="int">
             <column name="idpolitica" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="signosespeciales" type="string">
             <column name="signosespeciales" />
