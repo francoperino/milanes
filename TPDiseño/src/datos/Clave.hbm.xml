@@ -6,7 +6,7 @@
     <class name="datos.Clave" table="clave" schema="public" optimistic-lock="version">
         <id name="idclave" type="int">
             <column name="idclave" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="politicadeseguridad" class="datos.Politicadeseguridad" fetch="select">
             <column name="idpolitica" not-null="true" />
