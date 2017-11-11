@@ -32,9 +32,9 @@ public class Clave  implements java.io.Serializable {
        this.claveactual = claveactual;
        this.fechamodificacion = fechamodificacion;
     }
-    public Clave(Politicadeseguridad ps, Bedel adm, String contrasea, Date mifecha) {
+    public Clave(Politicadeseguridad ps, Usuario adm, String contrasea, Date mifecha) {
       this.politicadeseguridad = ps;
-      this.bedel = adm;
+      this.usuario = adm;
       this.claveactual = contrasea;
       this.fechamodificacion = mifecha;
     }

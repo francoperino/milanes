@@ -28,8 +28,7 @@ public class TPDiseño {
      */
    
     public static void main(String[] args) {
-        DaoBedel db = new DaoBedel();
-        db.buscarPorApellido("a");
+    
         /* datos.Politicadeseguridad adm = new datos.Politicadeseguridad();
         adm.setIdPolitica(1);
         adm.setContienedigito(true);
@@ -55,8 +54,8 @@ public class TPDiseño {
         System.out.println("hola");
         System.exit(0);
        */
-       /* iniciarSesion obj=new iniciarSesion();
-        obj.setVisible(true);*/
+       iniciarSesion obj=new iniciarSesion();
+        obj.setVisible(true);
 
     }
     

@@ -11,7 +11,7 @@ import java.util.Set;
 public class Usuario  implements java.io.Serializable {
 
 
-     private String nickusuario;
+     String nickusuario;
      private String apellido;
      private String nombre;
      private Set claves = new HashSet(0);
@@ -35,7 +35,12 @@ public class Usuario  implements java.io.Serializable {
        this.admin = admin;
        this.bedel = bedel;
     }
-   
+   public Usuario(String nickusuario, String apellido, String nombre) {
+       this.nickusuario = nickusuario;
+       this.apellido = apellido;
+       this.nombre = nombre;
+       
+    }
     public String getNickusuario() {
         return this.nickusuario;
     }

@@ -30,25 +30,80 @@ import org.hibernate.Session;
  */
 public class DaoBedel {
     
-     public void insertarBedel(String apellido,String nombre,String turno,String nickUsuario,String contrasea){
+    public void insertarBedel(Bedel bedel, String contrasea){
                      Session s = HibernateUtil.getSessionFactory().getCurrentSession();
                      s.beginTransaction();
-                     Politicadeseguridad ps = new Politicadeseguridad();
-                     ps.setIdpolitica(4);
-                     Usuario ar = new Usuario();
-                     ar.setNickusuario(nickUsuario);
-                     ar.setApellido(apellido);
-                     ar.setNombre(nombre);
-                     s.save(ar);
-                     Bedel adm = new Bedel(ar,turno);
+                     int lgm=0;
+                      Politicadeseguridad p = new Politicadeseguridad();
+            Query query= s.createQuery("select  new map(max(p.idpolitica)) from Politicadeseguridad p ");
+            List<Map> lista = query.list();
+            for(int i=0; i<lista.size();i++){
+                Map mapa = lista.get(i);
+                Set llaves = mapa.keySet();
+                for(Iterator<String> it = llaves.iterator(); it.hasNext();){
+                    String llaveActual = it.next();
+                   
+                    Politicadeseguridad ps =(Politicadeseguridad) s.get(Politicadeseguridad.class,(int)mapa.get(llaveActual));
+                    
+                    lgm = ps.getIdpolitica();
+                }
+                 
+                
+            }
+                     p.setIdpolitica(lgm);
+                     ;
+                     Usuario us = new Usuario();
+                     us.setNickusuario(bedel.getNickusuario());
+                     us.setApellido(bedel.getApellido());
+                     us.setNombre(bedel.getNombre());
+                     s.save(us);
+                     Bedel adm =  new Bedel();
+                     adm.setUsuario(us);
+                     adm.setNickusuario(bedel.getNickusuario());
+                     adm.setTurno(bedel.getTurno());
                      s.save(adm);
+                     
+                     
+                     
+                     
+                     
+                           
+                     
+                     
+                     
+                     
+                     
                      Date mifecha = new Date(115,6,2);
-                     Clave c = new Clave(ps,adm,contrasea,mifecha);
+                     Clave c = new Clave(p,us,contrasea,mifecha);
+                     
                      s.save(c);
                      s.getTransaction().commit();
                     
 }
- 
+    public Bedel recuperarBedel(String nickBedel,Bedel bedel){
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+                     s.beginTransaction();
+                     int lgm=0;
+                      Politicadeseguridad p = new Politicadeseguridad();
+            Query query= s.createQuery("select new map(u) from Usuario u, Bedel b where    (b.nickusuario = u.nickusuario) and (u.nickusuario =:nickUsuario) ").setParameter("nickUsuario",bedel.getNickusuario());
+            List<Map> lista = query.list();
+            for(int i=0; i<lista.size();i++){
+                Map mapa = lista.get(i);
+                Set llaves = mapa.keySet();
+                for(Iterator<String> it = llaves.iterator(); it.hasNext();){
+                    String llaveActual = it.next();
+                   
+                    Politicadeseguridad ps =(Politicadeseguridad) s.get(Politicadeseguridad.class,(int)mapa.get(llaveActual));
+                    
+                    lgm = ps.getIdpolitica();
+                }
+                 
+                
+            }
+                    
+                     s.getTransaction().commit();
+        return bedel;
+    }
     public List <Map> buscarPorApellido(String apellido){
         
             Session s =  HibernateUtil.getSessionFactory().getCurrentSession();

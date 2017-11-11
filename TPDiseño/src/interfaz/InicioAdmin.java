@@ -7,6 +7,7 @@ package interfaz;
 import controlador.GestorBedel;
 import datos.Bedel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,12 +35,13 @@ public class InicioAdmin extends javax.swing.JFrame {
      */
     public InicioAdmin() {
         initComponents();
+        
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Vista Principal");
         
     }
-
+DefaultTableModel modelo;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -411,8 +413,6 @@ public class InicioAdmin extends javax.swing.JFrame {
 
         jLabel11.setText("Nick de usuario");
 
-        jLabel12.setText("Jmansilla24");
-
         jButton9.setText("Confirmar");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -647,9 +647,14 @@ public class InicioAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+            
+            this.modelo = (DefaultTableModel) TablaBusqueda.getModel();
             jPanel3.removeAll();
             jPanel3.add(jPanel5);
             cambiarNombreBuscar("- modificar");
+            String nickBedel = String.valueOf(modelo.getValueAt(TablaBusqueda.getSelectedRow(),3));
+            TablaBusqueda.getSelectedRow();
+            jLabel12.setText(nickBedel);
             jPanel3.repaint();
             jPanel3.revalidate();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed

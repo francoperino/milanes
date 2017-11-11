@@ -25,12 +25,18 @@ public class GestorBedel {
     InicioAdmin ia = new InicioAdmin(); 
     GestorPoliticaClave gpc = new GestorPoliticaClave();
     public Integer registrarBedel(String apellido,String nombre,String turno,String nickUsuario,String contrasea ){
+       
         db = new DaoBedel();
-        Integer valor = gpc.validarClave(contrasea);
+        Bedel bd = new Bedel();
+        bd.setApellido(apellido);
+        bd.setNickusuario(nickUsuario);
+        bd.setNombre(nombre);
+        bd.setTurno(turno);
+        Integer valor = gpc.validarPoliticas(contrasea);
         switch(valor){
             case 0:
                  if(db.consultarNickBedel(nickUsuario).isEmpty()){
-                     db.insertarBedel(apellido,nombre,turno,nickUsuario,contrasea);
+                     db.insertarBedel(bd,contrasea);
                      valor =7 ;
                      
                  }
@@ -47,5 +53,30 @@ public class GestorBedel {
         }
                 
        return valor; 
+    }
+    public Integer modificarBedel(String apellido,String nombre,String turno,String contrasea,String nickUsuario){
+        db = new DaoBedel();
+        Integer valor = gpc.validarPoliticas(contrasea);
+        switch(valor){
+            case 0:
+                if(/*db.recuperarBedel(nickUsuario,)*/true){
+                     
+                     valor =7 ;
+                     
+                 }
+                 else{
+                     valor = 100;
+                 }
+                break;
+            default:
+                
+                
+                break;
+                
+            
+        }
+                
+       return valor;
+        
     }
 }

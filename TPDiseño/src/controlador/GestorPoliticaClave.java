@@ -9,7 +9,7 @@ import datos.Politicadeseguridad;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner; 
+//import java.util.Scanner; 
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,12 +24,12 @@ public class GestorPoliticaClave {
             
             
     
-   public Integer validarClave(String clave){
+   public Integer validarPoliticas(String clave){
        Session s =  HibernateUtil.getSessionFactory().getCurrentSession();
             s.beginTransaction();
             int lgm=0;
             
-            Boolean iguales,contiene=false;
+            Boolean iguales=false,contiene=false;
             Query query= s.createQuery("select  new map(max(p.idpolitica)) from Politicadeseguridad p ");
             List<Map> lista = query.list();
             for(int i=0; i<lista.size();i++){
@@ -38,11 +38,12 @@ public class GestorPoliticaClave {
                 for(Iterator<String> it = llaves.iterator(); it.hasNext();){
                     String llaveActual = it.next();
                    
-                    Politicadeseguridad ps = s.getSession().get(Politicadeseguridad.class,(int)mapa.get(llaveActual));
+                    Politicadeseguridad ps =(Politicadeseguridad) s.get(Politicadeseguridad.class,(int)mapa.get(llaveActual));
                     sign = ps.getSignosespeciales();
                     iguales = ps.getIgualaanterior();
                     lgm = ps.getLongclavemin();
                     contiene = ps.getContienedigito();
+                    
                 }
                  
                 
